@@ -6,9 +6,9 @@ public class UI extends PApplet
 {
     Button b;
     MovingCircle mc;
-
+    
     boolean[] keys = new boolean[1024];
-
+    
     public void keyPressed()
     {
         keys[keyCode] = true;
@@ -35,12 +35,14 @@ public class UI extends PApplet
     public void setup()
     {
         b = new Button(this, 50, 50, 100, 50, "I am a button");
-        mc = new MovingCircle(this, width * .75f, height * .15f, 400, 200);
+        mc = new MovingCircle(this, width * .75f + 600, height * .15f - 225, 400, 200);
         radar = new Radar(this, 1, width / 2, height / 2, 100);
         //赋值
         x = 0;
         y = 0;
         py = 0;
+        
+        
     }
 
     Radar radar;
@@ -67,6 +69,7 @@ public class UI extends PApplet
         }
         
         //下方渐变图层layer
+        noStroke();
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < height / 5; j++) {
                 py = j +(height - height / 5);
@@ -82,7 +85,7 @@ public class UI extends PApplet
 
         b.render();
 
-        //mc.update();
+        mc.update();
         mc.render();
 
         radar.update();
