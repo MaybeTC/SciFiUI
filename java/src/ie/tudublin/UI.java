@@ -4,9 +4,11 @@ import processing.core.PApplet;
 
 public class UI extends PApplet
 {
-    Button b;
-    MovingCircle mc;
-    
+    FrequencyButton fb;
+    TimezoneButton tb;
+    Clock c;
+
+
     boolean[] keys = new boolean[1024];
     
     public void keyPressed()
@@ -27,15 +29,16 @@ public class UI extends PApplet
 
     public void settings()
     {
-        size(1200, 800);
-        //fullScreen(); 
+        //size(1200, 800);
+        fullScreen(); 
         // Use fullscreen instead of size to make your interface fullscreen
     }
 
     public void setup()
     {
-        b = new Button(this, 50, 50, 100, 50, "I am a button");
-        mc = new MovingCircle(this, width * .75f /*+ 600*/, height * .15f /*+ 225*/, 400, 200);
+        fb = new FrequencyButton(this, 50, 50, 100, 50, "I am a button");
+        tb = new TimezoneButton(this, width * .75f /*+ 600*/, height * .15f /*+ 225*/, 400, 200);
+        c = new Clock(this, 1);
         radar = new Radar(this, 1, width / 2, height / 2, 100);
         //赋值
         x = 0;
@@ -86,10 +89,10 @@ public class UI extends PApplet
         topLayer();
         bottomLayer();
 
-        b.render();
+        fb.render();
 
         //mc.update();
-        mc.render();
+        tb.render();
 
         radar.update();
         radar.render();
