@@ -1,7 +1,7 @@
 package ie.tudublin;
 
 import com.sun.javafx.collections.MappingChange.Map;
-
+import java.util.ArrayList;
 import processing.core.PApplet;
 
 public class MovingCircle
@@ -10,7 +10,7 @@ public class MovingCircle
     private float y;
     private float width;
     private float height;
-    private float dx = 50;
+    //private float dx = 50;
     //private float b;
     //文本
     private String[] Text = {"C", "L", "O", "C", "K"};
@@ -37,16 +37,16 @@ public class MovingCircle
         //边框
         ui.stroke(255);
         ui.strokeWeight(4);
-        ui.line(x, y + 15, x + width, y - 15);
+        ui.line(x, y - 15, x + width, y + 15);
         /*for (int i = 0; i < width; i++) {
             for (int j = 0; j < 10; j++) {
                 ui.point(x + i , y + j);
                 ui.stroke(255, 255, 255);
             }
         }*/
-        ui.line(x, y + 15, x, y + height + 15);
-        ui.line(x + width, y - 15, x + width, y + height - 15);
-        ui.line(x, y + height + 15, x + width, y + height - 15);
+        ui.line(x, y - 15, x, y + height - 15);
+        ui.line(x + width, y + 15, x + width, y + height + 15);
+        ui.line(x, y + height - 15, x + width, y + height + 15);
         
         //Static field
         float a = x;
@@ -56,24 +56,32 @@ public class MovingCircle
             ui.textSize(50);
             ui.text(Text[i], a + 120, b + 100);
             a = a + 36;
-            b = b - 36 * .0375f;
+            b = b + 36 * .0375f;
             //0.0375 = 15 / 400
         }
 
     }
-
-    void reset()
+    
+    public void mouseClicked()
     {
-
+        int which = -1;
+		
+        if ((ui.mouseX > x && ui.mouseX < x + width))
+        {
+			if (ui.mouseY > y && ui.mouseY < y + height)
+            {
+                which = 1;
+            }
+			if(which != -1)
+			{
+				System.out.println("Hello");
+			}
+        }
     }
-    
-    
+
     public void update()
     {
-        x -= dx;
-        if(x <= ui.width * .75f){
-            dx *= 0;
-        }
+        
     }
     
 }
