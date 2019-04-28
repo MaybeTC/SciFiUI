@@ -12,8 +12,8 @@ public class TimezoneButton
     private float height;
     //private float dx = 50;
     //private float b;
-    //文本
-    private String[] Text = {"C", "L", "O", "C", "K"};
+    
+    private String[] Text = {"C", "L", "O", "C", "K"};//text
     
     UI ui;
 
@@ -31,9 +31,8 @@ public class TimezoneButton
 
     void drawButton()
     {
-        ui.stroke(255);
         ui.noFill();
-        //ui.rect(x, y, width, height);
+        
         //Frame of button
         ui.stroke(255);
         ui.strokeWeight(4);
@@ -59,6 +58,7 @@ public class TimezoneButton
         for(int i = 0 ; i < Text.length ; i ++){
             ui.textAlign(PApplet.CENTER, PApplet.CENTER);
             ui.textSize(50);
+            ui.fill(255);
             ui.text(Text[i], a + 120, b + 100);
             a = a + 36;
             b = b + 36 * .0375f;

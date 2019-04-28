@@ -36,9 +36,9 @@ public class UI extends PApplet
 
     public void setup()
     {
-        fb = new FrequencyButton(this, 50, 50, 100, 50, "I am a button");
-        tb = new TimezoneButton(this, width * .75f /*+ 600*/, height * .15f /*+ 225*/, 400, 200);
-        c = new Clock(this, 1);
+        fb = new FrequencyButton(this, width * .15f, height * .75f, 300, 150);
+        tb = new TimezoneButton(this, width * .75f , height * .15f, 400, 200);
+        c = new Clock(this, width * .25f, width * .25f, width * .3f);
         radar = new Radar(this, 1, width / 2, height / 2, 100);
         //赋值
         x = 0;
@@ -93,7 +93,7 @@ public class UI extends PApplet
 
         //mc.update();
         tb.render();
-
+        c.render();
         radar.update();
         radar.render();
 
