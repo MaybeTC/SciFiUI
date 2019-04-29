@@ -91,7 +91,7 @@ public class UI extends PApplet
         bottomLayer();
 
         b1.render();
-        b1.mouseClicked();
+        
         //mc.update();
         b2.render();
         c.render();

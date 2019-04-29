@@ -2,7 +2,7 @@ package ie.tudublin;
 
 import processing.core.PApplet;
 
-public class Button2
+public class Button2 extends PApplet
 {
     UI ui;
     private float x;
@@ -37,8 +37,8 @@ public class Button2
         for(int j = 0 ; j < height ; j++)
         {
             ui.line(x, y + 15 + j, x + width, y - 15 + j);
-            c = ui.map(j, 0, height, 64, 0);
-            d = ui.map(j, 0, height, 128, 0);
+            c = map(j, 0, height, 64, 0);
+            d = map(j, 0, height, 128, 0);
             ui.stroke(0, c, d);
         }
 

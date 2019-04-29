@@ -3,7 +3,7 @@ package ie.tudublin;
 import processing.core.PApplet;
 import processing.core.PVector;
 
-public class Clock
+public class Clock extends PApplet
 {
     private float x;
     private float y;
@@ -30,7 +30,7 @@ public class Clock
     void drawclockdial()
     {   
         // draw dial 
-        ui.ellipseMode(ui.CENTER);
+        ui.ellipseMode(CENTER);
         ui.strokeWeight(10);
         ui.fill(255);
         ui.ellipse(x, y, cd, cd);
@@ -40,7 +40,7 @@ public class Clock
         {
             ui.pushMatrix();  // Coordinate system location
             ui.translate(x, y);  // Moving coordinate system(0,0)to(width/2, height/2)
-            ui.rotate(ui.radians(i * 6));
+            ui.rotate(radians(i * 6));
             if(i % 5 == 0) 
             { 
                 // The tick mark of the whole point
@@ -138,15 +138,15 @@ public class Clock
         ui.pushMatrix();
         ui.translate(x, y);
 
-        float angleHour = ui.radians(270);
+        float angleHour = radians(270);
 
         if((Hourfloat >= 3 && Hourfloat <= 12) || Hourfloat >= 15 && Hourfloat <= 24)
         {
-            angleHour = ui.radians(30 * (Hourfloat - 3));
+            angleHour = radians(30 * (Hourfloat - 3));
         }
         else
         {
-            angleHour = ui.radians(30 * (Hourfloat - 1) + 300);
+            angleHour = radians(30 * (Hourfloat - 1) + 300);
         }
         if (flag)// 判断是否按下按键，停止转动
         {
@@ -154,7 +154,7 @@ public class Clock
         } 
         else 
         {
-            ui.rotate(ui.radians(270));
+            ui.rotate(radians(270));
         }
         
         ui.stroke(0);
@@ -167,15 +167,15 @@ public class Clock
         ui.pushMatrix();
         ui.translate(x, y);
 
-        float angleMinute = ui.radians(270);
+        float angleMinute = radians(270);
 
         if((Minutefloat >= 0 && Minute <= 15))
         {
-            angleMinute = ui.radians(270 + 6 * Minutefloat);
+            angleMinute = radians(270 + 6 * Minutefloat);
         }
         else
         {
-            angleMinute = ui.radians(6 * (Minutefloat - 15));
+            angleMinute = radians(6 * (Minutefloat - 15));
         }
         if (flag)// 判断是否按下按键，停止转动
         {
@@ -183,7 +183,7 @@ public class Clock
         } 
         else 
         {
-            ui.rotate(ui.radians(0));
+            ui.rotate(radians(0));
         }
 
         ui.stroke(0);
@@ -196,15 +196,15 @@ public class Clock
         ui.pushMatrix();
         ui.translate(x, y);
 
-        float angleSecond = ui.radians(270);
+        float angleSecond = radians(270);
 
         if ((Second >= 0 && Second <= 15)) 
         {
-            angleSecond = ui.radians(270 + 6 * Second);
+            angleSecond = radians(270 + 6 * Second);
         } 
         else 
         {
-            angleSecond = ui.radians(6 * (Second - 15));
+            angleSecond = radians(6 * (Second - 15));
         }
         if (flag) // 判断是否按下按键，停止转动
         { 
@@ -212,7 +212,7 @@ public class Clock
         } 
         else 
         {
-            ui.rotate(ui.radians(180));
+            ui.rotate(radians(180));
         }
 
         ui.stroke(255,0,0);
@@ -235,15 +235,15 @@ public class Clock
         ui.rect(z - ecw / 2, l - ecw * .65f / 2, ecw, ecw * .65f, 9);
 
         //Diplay time and date
-        Second = ui.second();
-        Minute = ui.minute();
-        Hour = ui.hour();
-        Minutefloat = ui.minute() + Second / 60.0f;
-        Hourfloat = ui.hour() + Minute / 60.0f;
+        Second = second();
+        Minute = minute();
+        Hour = hour();
+        Minutefloat = minute() + Second / 60.0f;
+        Hourfloat = hour() + Minute / 60.0f;
 
-        Year = ui.year();
-        Month = ui.month();
-        Day = ui.day();
+        Year = year();
+        Month = month();
+        Day = day();
 
         String secondDraw = Second + "";
         String minuteDraw = Minute + "";

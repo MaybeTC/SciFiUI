@@ -4,7 +4,7 @@ import com.sun.javafx.collections.MappingChange.Map;
 
 import processing.core.PApplet;
 
-public class Button1
+public class Button1 extends PApplet
 {
     private float x;
     private float y;
@@ -29,6 +29,11 @@ public class Button1
         //radius = diameter / 2;
     }
 
+    int a = 64;
+    int b = 0;
+    int e = 128;
+    int f = 0;
+
     void drawButton()
     {
         ui.noFill();
@@ -47,8 +52,8 @@ public class Button1
         for(int j = 0 ; j < height ; j++)
         {
             ui.line(x, y - 15 + j, x + width, y + 15 + j);
-            c = ui.map(j, 0, height, 64, 0);
-            d = ui.map(j, 0, height, 128, 0);
+            c = map(j, 0, height, a, b);
+            d = map(j, 0, height, e, f);
             ui.stroke(0, c, d);
         }
 
@@ -71,7 +76,8 @@ public class Button1
     public void render()
     {
         drawButton();
-        
+        mouseClicked();
+        noLoop();
     }
     
     public void mouseClicked()
@@ -83,14 +89,23 @@ public class Button1
 			if ((ui.mouseY > y && ui.mouseY < y + height))
             {
                 which = 1;
-                break;
+                //
+                int i = 1;
+                i = a;
+                a = b;
+                b = i;
+                i = e;
+                e = f;
+                f = i;
             }
 			
         }
         if(which != -1)
-			{
-				System.out.println("Hello");
-			}
+		{
+            System.out.println("hello");
+            
+        }
+        
     }
 
     public void update()
