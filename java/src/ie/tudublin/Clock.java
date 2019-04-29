@@ -11,10 +11,11 @@ public class Clock
 
     private float z;
     private float l;
+    private float ecw;//width of Electronic clock
 
     UI ui;
 
-    public Clock(UI ui,float x, float y, float cd, float z, float l)
+    public Clock(UI ui,float x, float y, float cd, float z, float l, float ecw)
     {
         this.ui = ui;
         this.x = x;
@@ -23,9 +24,10 @@ public class Clock
 
         this.z = z;
         this.l = l;
+        this.ecw = ecw;
     }
 
-    void drawclock()
+    void drawclockdial()
     {   
         // draw dial 
         ui.ellipseMode(ui.CENTER);
@@ -103,7 +105,10 @@ public class Clock
         //ui.quad(38, 31, 86, 20, 69, 63, 30, 76);
         //ui.quad(38, 31, 86, 20, 69, 63, 30, 76);
         */
+
     }
+
+    Boolean flag = true;// 控制是否播放音乐
 
     int Second;
     int Minute;
@@ -115,16 +120,119 @@ public class Clock
     int Month;
     int Day;
 
+
+    void drawhand()
+    {
+        // 判断是否按下暂停和启动键
+        if (ui.key == 's' || ui.key == 'S') 
+        {
+            flag = true;
+        } 
+        else if (ui.key=='t' || ui.key=='T') 
+        {
+            flag = false;
+        }
+
+
+        //hour hand
+        ui.pushMatrix();
+        ui.translate(x, y);
+
+        float angleHour = ui.radians(270);
+
+        if((Hourfloat >= 3 && Hourfloat <= 12) || Hourfloat >= 15 && Hourfloat <= 24)
+        {
+            angleHour = ui.radians(30 * (Hourfloat - 3));
+        }
+        else
+        {
+            angleHour = ui.radians(30 * (Hourfloat - 1) + 300);
+        }
+        if (flag)// 判断是否按下按键，停止转动
+        {
+            ui.rotate(angleHour);
+        } 
+        else 
+        {
+            ui.rotate(ui.radians(270));
+        }
+        
+        ui.stroke(0);
+        ui.strokeWeight(15);
+        ui.line(-cd * .02f, 0, cd * .15f, 0);
+        ui.popMatrix();
+
+
+        //minute hand
+        ui.pushMatrix();
+        ui.translate(x, y);
+
+        float angleMinute = ui.radians(270);
+
+        if((Minutefloat >= 0 && Minute <= 15))
+        {
+            angleMinute = ui.radians(270 + 6 * Minutefloat);
+        }
+        else
+        {
+            angleMinute = ui.radians(6 * (Minutefloat - 15));
+        }
+        if (flag)// 判断是否按下按键，停止转动
+        {
+            ui.rotate(angleMinute);
+        } 
+        else 
+        {
+            ui.rotate(ui.radians(0));
+        }
+
+        ui.stroke(0);
+        ui.strokeWeight(9);
+        ui.line(-cd * .024f, 0, cd * .25f, 0);
+        ui.popMatrix();
+        
+
+        //second hand
+        ui.pushMatrix();
+        ui.translate(x, y);
+
+        float angleSecond = ui.radians(270);
+
+        if ((Second >= 0 && Second <= 15)) 
+        {
+            angleSecond = ui.radians(270 + 6 * Second);
+        } 
+        else 
+        {
+            angleSecond = ui.radians(6 * (Second - 15));
+        }
+        if (flag) // 判断是否按下按键，停止转动
+        { 
+            ui.rotate(angleSecond);
+        } 
+        else 
+        {
+            ui.rotate(ui.radians(180));
+        }
+
+        ui.stroke(255,0,0);
+        ui.strokeWeight(3);
+        ui.line(-cd * .025f, 0, cd * .32f, 0);
+        ui.fill(255,0,0);
+        ui.ellipse(cd * .36f, 0, 15, 15);
+        ui.stroke(255);
+        ui.popMatrix();
+    }
+
+
     void drawElectronicClock(){
         //draw dial
         ui.noStroke();
         ui.fill(255);
-        ui.rect(z - 170, l - 105, 340, 210, 9);
+        ui.rect(z - ecw * 1.133f / 2, l - ecw * .65f * 1.05f / 2, ecw * 1.133f, ecw * .65f * 1.05f, 9);
         ui.noStroke();
-        ui.fill(0);
-        ui.rect(z - 150, l - 100, 300, 200, 9);
-
-
+        ui.fill(0, 8, 16);
+        ui.rect(z - ecw / 2, l - ecw * .65f / 2, ecw, ecw * .65f, 9);
 
         //Diplay time and date
         Second = ui.second();
@@ -156,22 +264,23 @@ public class Clock
 
         //Display time
         String Time = hourDraw + ":" + minuteDraw + ":" + secondDraw;
-        ui.textSize(50);
+        ui.textSize(90);
         ui.fill(255);
-        ui.text(Time, z, l - 20);
+        ui.text(Time, z, l - 40);
 
         //Display date
         String Date = Year + "/" + Month + "/" + Day;
-        ui.textSize(30);
+        ui.textSize(45);
         ui.fill(255);
-        ui.text(Date, z, l + 35);
+        ui.text(Date, z, l + 60);
 
     }
 
     public void render()
     {
-        drawclock();
+        drawclockdial();
         drawElectronicClock();
+        drawhand();
     }
 
     public void update()

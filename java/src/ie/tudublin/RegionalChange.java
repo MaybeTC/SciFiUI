@@ -2,7 +2,7 @@ package ie.tudublin;
 
 import processing.core.PApplet;
 
-public class MovingRect
+public class RegionalChange
 {
     private float x;
     private float dx = 1;
@@ -11,7 +11,7 @@ public class MovingRect
     private float radius;
     UI ui;
 
-    public MovingRect(UI ui, float x, float y, float diameter)
+    public RegionalChange(UI ui, float x, float y, float diameter)
     {
         this.ui = ui;
         this.x = x;

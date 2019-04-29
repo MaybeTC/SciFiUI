@@ -2,7 +2,7 @@ package ie.tudublin;
 
 import processing.core.PApplet;
 
-public class FrequencyButton
+public class Button2
 {
     UI ui;
     private float x;
@@ -11,7 +11,7 @@ public class FrequencyButton
     private float height;
     private String[] Text = {"B", "U", "T", "T", "O", "N"};
 
-    public FrequencyButton(UI ui, float x, float y, float width, float height)
+    public Button2(UI ui, float x, float y, float width, float height)
     {
         this.ui = ui;
         this.x = x;

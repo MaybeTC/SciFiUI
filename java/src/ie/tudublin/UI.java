@@ -4,9 +4,10 @@ import processing.core.PApplet;
 
 public class UI extends PApplet
 {
-    FrequencyButton fb;
-    TimezoneButton tb;
+    Button1 b1;
+    Button2 b2;
     Clock c;
+    RegionalChange rc;
 
 
     boolean[] keys = new boolean[1024];
@@ -36,11 +37,11 @@ public class UI extends PApplet
 
     public void setup()
     {
-        fb = new FrequencyButton(this, width * .15f, height * .75f, 300, 150);
-        tb = new TimezoneButton(this, width * .75f , height * .15f, 400, 200);
-        c = new Clock(this, width * .25f, width * .25f, width * .3f, width * .75f, height * .75f);
+        b1 = new Button1(this, width * .75f , height * .15f, 400, 200);
+        b2 = new Button2(this, width * .15f, height * .75f, 300, 150);
+        c = new Clock(this, width * .25f, width * .25f, width * .3f, width * .75f, height * .75f, width * .28f);
         radar = new Radar(this, 1, width / 2, height / 2, 100);
-        //赋值
+        //Get value
         x = 0;
         y = 0;
         py = 0;
@@ -56,7 +57,7 @@ public class UI extends PApplet
 
     void topLayer()
     {
-        //上方渐变图层layer
+        //Top gradient layer
         for (int i = 0; i < height / 5; i++) {
             
             x = map(i, 0, height / 5, 64, 0);
@@ -70,7 +71,7 @@ public class UI extends PApplet
 
     void bottomLayer()
     {
-        //下方渐变图层layer
+        //bottom gradient layer 
         for (int i = 0; i < height / 5; i++) {
             py = i +(height - height / 5);
             x = map(i, 0, height / 5, 0, 64);
@@ -89,11 +90,12 @@ public class UI extends PApplet
         topLayer();
         bottomLayer();
 
-        fb.render();
-
+        b1.render();
+        b1.mouseClicked();
         //mc.update();
-        tb.render();
+        b2.render();
         c.render();
+        //rc.render();
         radar.update();
         radar.render();
 

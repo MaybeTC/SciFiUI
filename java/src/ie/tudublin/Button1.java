@@ -4,7 +4,7 @@ import com.sun.javafx.collections.MappingChange.Map;
 
 import processing.core.PApplet;
 
-public class TimezoneButton
+public class Button1
 {
     private float x;
     private float y;
@@ -17,7 +17,7 @@ public class TimezoneButton
     
     UI ui;
 
-    public TimezoneButton(UI ui, float x, float y, float width, float height)
+    public Button1(UI ui, float x, float y, float width, float height)
     {
         this.ui = ui;
         this.x = x;
