@@ -80,9 +80,10 @@ public class Button1
 		
         if ((ui.mouseX > x && ui.mouseX < x + width))
         {
-			if (ui.mouseY > y && ui.mouseY < y + height)
+			if ((ui.mouseY > y && ui.mouseY < y + height))
             {
                 which = 1;
+                break;
             }
 			
         }
