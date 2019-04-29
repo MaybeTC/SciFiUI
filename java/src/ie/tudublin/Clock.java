@@ -9,19 +9,25 @@ public class Clock
     private float y;
     private float cd;//Diameter of clock
 
+    private float z;
+    private float l;
+
     UI ui;
 
-    public Clock(UI ui,float x, float y, float cd)
+    public Clock(UI ui,float x, float y, float cd, float z, float l)
     {
         this.ui = ui;
         this.x = x;
         this.y = y;
         this.cd = cd;
+
+        this.z = z;
+        this.l = l;
     }
 
     void drawclock()
     {   
-        // dial 
+        // draw dial 
         ui.ellipseMode(ui.CENTER);
         ui.strokeWeight(10);
         ui.fill(255);
@@ -99,9 +105,73 @@ public class Clock
         */
     }
 
+    int Second;
+    int Minute;
+    int Hour;
+    float Minutefloat;
+    float Hourfloat;
+
+    int Year;
+    int Month;
+    int Day;
+
+    void drawElectronicClock(){
+        //draw dial
+        ui.noStroke();
+        ui.fill(255);
+        ui.rect(z - 170, l - 105, 340, 210, 9);
+        ui.noStroke();
+        ui.fill(0);
+        ui.rect(z - 150, l - 100, 300, 200, 9);
+
+
+
+        //Diplay time and date
+        Second = ui.second();
+        Minute = ui.minute();
+        Hour = ui.hour();
+        Minutefloat = ui.minute() + Second / 60.0f;
+        Hourfloat = ui.hour() + Minute / 60.0f;
+
+        Year = ui.year();
+        Month = ui.month();
+        Day = ui.day();
+
+        String secondDraw = Second + "";
+        String minuteDraw = Minute + "";
+        String hourDraw = Hour + "";
+
+        if(Second < 10)
+        {
+            secondDraw = "0" + Second;
+        }
+        if(Minute < 10)
+        {
+            minuteDraw = "0" + Minute;
+        }
+        if(Hour < 10)
+        {
+            hourDraw = "0" + Hour;
+        }
+
+        //Display time
+        String Time = hourDraw + ":" + minuteDraw + ":" + secondDraw;
+        ui.textSize(50);
+        ui.fill(255);
+        ui.text(Time, z, l - 20);
+
+        //Display date
+        String Date = Year + "/" + Month + "/" + Day;
+        ui.textSize(30);
+        ui.fill(255);
+        ui.text(Date, z, l + 35);
+
+    }
+
     public void render()
     {
         drawclock();
+        drawElectronicClock();
     }
 
     public void update()
