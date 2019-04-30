@@ -81,11 +81,14 @@ public class ButtonRight extends PApplet
         drawButton1();
         mouseClicked();
         mouseOnTheRight();
+        drawObstructionsOfClock();
     }
-    
+
+
+    //If the mouse is near the right button, button will change.
     public void mouseOnTheRight()
     {
-        if (ui.mouseX > sw * .55f)
+        if (ui.mouseX > sw * .52f)
         {
             g = 0;
             k = -50;
@@ -99,13 +102,10 @@ public class ButtonRight extends PApplet
 
     public void mouseClicked()
     {
-        int which = -1;
-		
         if ((ui.mouseX > x + k && ui.mouseX < x + width + k))
         {
 			if ((ui.mouseY > y && ui.mouseY < y + height))
             {
-                which = 1;
                 //The button blinks When the mouse on the button
                 int i = 1;
                 i = a;
@@ -117,12 +117,16 @@ public class ButtonRight extends PApplet
             }
 			
         }
-        if(which != -1)
-		{
-            System.out.println("hello");
-            
-        }
-        
+    }
+
+    void drawObstructionsOfClock()
+    {
+        ui.ellipseMode(CENTER);
+        ui.stroke(0);
+        ui.strokeWeight(10);
+        ui.fill(255);
+        ui.ellipse(sw * .25f, sw * .25f, sw * .3f, sw * .3f);
+        //ui.popMatrix();
     }
 
     public void update()

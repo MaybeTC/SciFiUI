@@ -5,6 +5,7 @@ import processing.core.PVector;
 
 public class Clock extends PApplet
 {
+    
     private float x;
     private float y;
     private float cd;//Diameter of clock
@@ -12,15 +13,19 @@ public class Clock extends PApplet
     private float z;
     private float l;
     private float ecw;//width of Electronic clock
+    private float sw;//Screen width
+    private float sh;//Screen height
 
     UI ui;
 
-    public Clock(UI ui,float x, float y, float cd, float z, float l, float ecw)
+    public Clock(UI ui,float x, float y, float cd, float z, float l, float ecw, float sw, float sh)
     {
         this.ui = ui;
         this.x = x;
         this.y = y;
         this.cd = cd;
+        this.sw = sw;
+        this.sh = sh;
 
         this.z = z;
         this.l = l;
@@ -124,15 +129,16 @@ public class Clock extends PApplet
 
     void drawhand()
     {
+        mouseClicked1();
         // Judging whether the pause and start keys are pressed or not
-        if (ui.key == 's' || ui.key == 'S') 
+        /*if (ui.key == 's' || ui.key == 'S')
         {
             flag = true;
         } 
         else if (ui.key=='t' || ui.key=='T') 
         {
             flag = false;
-        }
+        }*/
 
 
         //hour hand
@@ -284,8 +290,46 @@ public class Clock extends PApplet
         drawhand();
     }
 
-    public void update()
-    {
 
+    public void mouseClicked1()
+    {
+        //Clicked Start button
+        int which = -1;
+        
+        if ((ui.mouseX > sw * .1f && ui.mouseX < sw * .1f + 300))
+        {
+			if ((ui.mouseY > sh * .75f && ui.mouseY < sh * .75f + 150))
+            {
+                
+                which = 1;
+                
+            }
+			
+        }
+        if(which != -1)
+        {
+            flag = true;
+        }
+
+        //Clinked Pause button
+        float p = sw / 5;
+        int which2 = -1;
+        if ((ui.mouseX > sw * .1f + p && ui.mouseX < sw * .1f + 300 + p))
+        {
+			if ((ui.mouseY > sh * .75f && ui.mouseY < sh * .75f + 150))
+            {
+                
+                which2 = 1;
+                
+            }
+			
+        }
+        if(which2 != -1)
+        {
+            flag = false;
+            
+        }
     }
+
+
 }
