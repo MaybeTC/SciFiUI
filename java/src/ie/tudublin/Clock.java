@@ -31,6 +31,7 @@ public class Clock extends PApplet
     {   
         // draw dial 
         ui.ellipseMode(CENTER);
+        ui.stroke(0);
         ui.strokeWeight(10);
         ui.fill(255);
         ui.ellipse(x, y, cd, cd);
@@ -108,7 +109,7 @@ public class Clock extends PApplet
 
     }
 
-    Boolean flag = true;// 控制是否播放音乐
+    Boolean flag = true;//Control Pause and Start
 
     int Second;
     int Minute;
@@ -123,7 +124,7 @@ public class Clock extends PApplet
 
     void drawhand()
     {
-        // 判断是否按下暂停和启动键
+        // Judging whether the pause and start keys are pressed or not
         if (ui.key == 's' || ui.key == 'S') 
         {
             flag = true;
@@ -148,7 +149,7 @@ public class Clock extends PApplet
         {
             angleHour = radians(30 * (Hourfloat - 1) + 300);
         }
-        if (flag)// 判断是否按下按键，停止转动
+        if (flag)// Judging whether the key is pressed or not and stopping the rotation
         {
             ui.rotate(angleHour);
         } 
@@ -177,7 +178,7 @@ public class Clock extends PApplet
         {
             angleMinute = radians(6 * (Minutefloat - 15));
         }
-        if (flag)// 判断是否按下按键，停止转动
+        if (flag)// Judging whether the key is pressed or not and stopping the rotation
         {
             ui.rotate(angleMinute);
         } 
@@ -206,7 +207,7 @@ public class Clock extends PApplet
         {
             angleSecond = radians(6 * (Second - 15));
         }
-        if (flag) // 判断是否按下按键，停止转动
+        if (flag) // Judging whether the key is pressed or not and stopping the rotation
         { 
             ui.rotate(angleSecond);
         } 

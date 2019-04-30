@@ -7,8 +7,6 @@ public class UI extends PApplet
     Button1 b1;
     Button2 b2;
     Clock c;
-    RegionalChange rc;
-
 
     boolean[] keys = new boolean[1024];
     
@@ -37,8 +35,8 @@ public class UI extends PApplet
 
     public void setup()
     {
-        b1 = new Button1(this, width * .75f , height * .15f, 400, 200);
-        b2 = new Button2(this, width * .15f, height * .75f, 300, 150);
+        b1 = new Button1(this, width * .75f , height * .15f, 400, 200, width);
+        b2 = new Button2(this, width * .15f, height * .75f, 300, 150, width);
         c = new Clock(this, width * .25f, width * .25f, width * .3f, width * .75f, height * .75f, width * .28f);
         radar = new Radar(this, 1, width / 2, height / 2, 100);
         //Get value
@@ -95,7 +93,6 @@ public class UI extends PApplet
         //mc.update();
         b2.render();
         c.render();
-        //rc.render();
         radar.update();
         radar.render();
 
