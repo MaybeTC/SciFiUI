@@ -5,10 +5,12 @@ import processing.core.PVector;
 
 public class Radar
 {
-    private float radius;
-    private PVector pos;
-    private float frequency;
     private UI ui;
+
+    private float frequency;
+    private PVector pos;
+    private float radius;
+
     private float theta = 0;
 
     public Radar(UI ui, float frequency, float x, float y, float radius)

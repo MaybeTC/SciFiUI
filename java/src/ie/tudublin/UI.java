@@ -35,10 +35,10 @@ public class UI extends PApplet
 
     public void setup()
     {
-        br = new ButtonRight(this, width * .75f , height * .15f, 400, 200, width);
-        bl = new ButtonLeft(this, width * .1f, height * .75f, 300, 150, width);
-        c = new Clock(this, width * .25f, width * .25f, width * .3f, width * .75f, height * .75f, width * .28f, width, height);
-        radar = new Radar(this, 1, width / 2, height / 2, 100);
+        br = new ButtonRight(this, width * .75f , height * .15f, 400, 200, width, height);
+        bl = new ButtonLeft(this, width * .085f, height * .75f, width * .085f, height * .2f, 300, 150, width, height);
+        c = new Clock(this, width * .28f, width * .25f, width * .3f, width * .28f, height * .65f, width * .28f, width, height);
+        radar = new Radar(this, 1, width / 2, height / 2, width * .25f);
         //Get value
         x = 0;
         y = 0;
@@ -88,13 +88,13 @@ public class UI extends PApplet
         topLayer();
         bottomLayer();
 
+        radar.update();
+        radar.render();
         br.render();
-        
         //mc.update();
         bl.render();
         c.render();
-        radar.update();
-        radar.render();
+        
 
         if (checkKey(LEFT))
         {
