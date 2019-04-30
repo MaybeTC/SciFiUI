@@ -1,0 +1,183 @@
+package ie.tudublin;
+
+import processing.core.PApplet;
+
+public class Note extends PApplet
+{
+    private float nx;
+    private float ny;
+    private float nwidth;
+    private float nheight;
+
+    private float sw;//Screen width
+    private float sh;//Screen height
+
+    UI ui;
+
+    // text of keys
+    private String[] Text = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "q", "w", "e", "r", "t", "y", "u", "i", "o", "p","A","S","D","F","G","H","J","K","L",";","'","Z","X","C","V","B","N","M",",",".","/","Enter"};
+    // text of flag
+    //private String[] Text2 = {"flag1", "flag2", "flag3", "flag4", "flag5", "flag6", "flag7", "flag8", "flag9", "flag10", "flagQ", "flagW", "flagE", "flagR", "flagT", "flagY", "flagU", "flagI", "flagO", "flagP","flagA","flagS","flagD","flagF","flagG","flagH","flagJ","flagK","flagL","flag11","flag12","flagZ","flagX","flagC","flagV","flagB","flagN","flagM","flag13","flag14","flag15","flagEnter"};
+    public Note(UI ui, float nx, float ny, float nwidth, float nheight, float sw, float sh)
+    {
+        this.ui = ui;
+        this.nx = nx;
+        this.ny = ny;
+        this.nwidth = nwidth;
+        this.nheight = nheight;
+        this.sw = sw;
+        this.sh = sh;
+    }
+
+    void drawInputWindow()
+    {
+        //draw Keyboard
+        if(flag)
+        {
+            ui.stroke(0);
+            ui.strokeWeight(1);
+            ui.fill(255);
+            ui.rect(nx, ny , nwidth, nheight, 10);
+        
+
+            //draw keys
+            for(int i = 0; i < 10; i++)
+            {
+                for(int j = 0; j < 4; j++)
+                {
+                    int q = i + j * 10;
+                    float gap = 3;
+                    float a = nx + gap + nwidth / 10 * i;
+                    float b = ny + gap + nwidth / 10 * j;
+                    ui.stroke(255);
+                    ui.strokeWeight(1);
+                    ui.fill(0);
+                    ui.rect(a, b , nwidth / 10, nwidth / 10, 10);
+
+                    //Letters and Numbers
+                    ui.textAlign(PApplet.CENTER, PApplet.CENTER);
+                    ui.strokeWeight(5);
+                    ui.textSize(40);
+                    ui.fill(255);
+                    ui.text(Text[q], nx + nwidth / 20 + i * nwidth / 10, ny + nwidth / 20 + j * nwidth / 10);
+
+                }
+            }
+            //key of "Enter"
+            ui.stroke(255);
+            ui.strokeWeight(1);
+            ui.fill(0);
+            ui.rect(nx + width + 15, ny + nheight / 3 , nwidth / 9, nwidth / 10, 10);
+            ui.textAlign(PApplet.CENTER, PApplet.CENTER);
+            ui.strokeWeight(5);
+            ui.textSize(25);
+            ui.fill(255);
+            ui.text(Text[41],nx + nwidth + 15 + nwidth / 18, ny + nheight / 3 + nwidth / 20);
+
+            //draw screen
+            //big screen
+            ui.stroke(0);
+            ui.strokeWeight(10);
+            ui.fill(255);
+            ui.rect(nx / 2, ny - nheight * 3, nwidth * 1.5f, nheight * 1.8f, 10);
+            //small screen
+            ui.stroke(255);
+            ui.strokeWeight(10);
+            ui.fill(0);
+            ui.rect(nx, ny - nheight, nwidth, nheight, 10);
+        }
+                
+    }
+
+    void drawText()
+    {
+        if(flag)
+        {
+            ui.strokeWeight(5);
+            ui.textSize(50);
+            ui.fill(255);
+            ui.text(Text[1], nx + nwidth / 2, ny - nheight / 2);
+        }
+    }
+
+
+    public void render()
+    {
+        drawInputWindow();
+        drawText();
+        mouseClicked();
+    }
+    /*
+    void flag(){
+        for(int i = 0; i < 10; i++)
+        {
+            for(int j = 0; j < 4; j++)
+            {
+                int q = i + j * 10;
+                Boolean text[q] = true;
+
+            }
+        }
+
+    }*/
+
+    Boolean flag = false;
+
+
+    public void mouseClicked()
+    {
+        //Clicked Classic button
+        int which = -1;
+        
+        if ((ui.mouseX > sw * .75f && ui.mouseX < sw * .75f + 400))
+        {
+			if ((ui.mouseY > sh * .15f && ui.mouseY < sh * .15f + 200))
+            {
+                
+                which = 1;
+                
+            }
+			
+        }
+        if(which != -1)
+        {
+            flag = false;
+        }
+
+        //Clinked Electronic button
+        float p = sh / 3;
+        int which2 = -1;
+        if ((ui.mouseX > sw * .75f && ui.mouseX < sw * .75f + 400))
+        {
+			if ((ui.mouseY > sh * .15f + p && ui.mouseY < sh * .15f + 200 + p))
+            {
+                
+                which2 = 1;
+                
+            }
+			
+        }
+        if(which2 != -1)
+        {
+            flag = false;
+        }
+        //Clicked Note button
+        if ((ui.mouseX > sw * .75f && ui.mouseX < sw * .75f + 400))
+        {
+			if ((ui.mouseY > sh * .15f + p * 2 && ui.mouseY < sh * .15f + 200 + p * 2))
+            {
+                
+                which2 = 1;
+                
+            }
+			
+        }
+        if(which2 != -1)
+        {
+            flag = true;
+            
+        }
+    }
+    
+}
+

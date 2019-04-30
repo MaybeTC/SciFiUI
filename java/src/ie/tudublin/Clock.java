@@ -1,7 +1,6 @@
 package ie.tudublin;
 
 import processing.core.PApplet;
-import processing.core.PVector;
 
 public class Clock extends PApplet
 {
@@ -16,9 +15,16 @@ public class Clock extends PApplet
     private float sw;//Screen width
     private float sh;//Screen height
 
+    private float nx;//note x
+    private float ny;//note y
+    private float nwidth;// note w
+    private float nheight;// note h
+
     UI ui;
 
-    public Clock(UI ui,float x, float y,  float cd, float z, float l, float ecw, float sw, float sh)
+    private String[] Text = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "q", "w", "e", "r", "t", "y", "u", "i", "o", "p","A","S","D","F","G","H","J","K","L",";","'","Z","X","C","V","B","N","M",",",".","/","Enter"};
+
+    public Clock(UI ui,float x, float y,  float cd, float z, float l, float ecw, float sw, float sh, float nx, float ny, float nwidth, float nheight)
     {
         this.ui = ui;
         this.x = x;
@@ -29,6 +35,13 @@ public class Clock extends PApplet
         this.l = l;
         this.ecw = ecw;
 
+        this.sw = sw;
+        this.sh = sh;
+
+        this.nx = nx;
+        this.ny = ny;
+        this.nwidth = nwidth;
+        this.nheight = nheight;
         this.sw = sw;
         this.sh = sh;
 
@@ -120,6 +133,7 @@ public class Clock extends PApplet
 
     Boolean flag = true;//Control classic clock Pause and Start
     Boolean flag2 = true;//Control electronic clock Pause and Start
+    
 
     int Second;
     int Minute;
@@ -295,9 +309,96 @@ public class Clock extends PApplet
         drawclockdial();
         drawElectronicClock();
         drawhand();
+        drawInputWindow();
+        drawText();
         mouseClicked3();
     }
 
+    //note
+    void drawInputWindow()
+    {
+        //draw Keyboard
+        if(flag5)
+        {
+            ui.stroke(0);
+            ui.strokeWeight(1);
+            ui.fill(255);
+            ui.rect(nx, ny , nwidth, nheight, 10);
+        
+
+            //draw keys
+            for(int i = 0; i < 10; i++)
+            {
+                for(int j = 0; j < 4; j++)
+                {
+                    int q = i + j * 10;
+                    float gap = 3;
+                    float a = nx + gap + nwidth / 10 * i;
+                    float b = ny + gap + nwidth / 10 * j;
+                    ui.stroke(255);
+                    ui.strokeWeight(1);
+                    ui.fill(0);
+                    ui.rect(a, b , nwidth / 10, nwidth / 10, 10);
+
+                    //Letters and Numbers
+                    ui.textAlign(PApplet.CENTER, PApplet.CENTER);
+                    ui.strokeWeight(5);
+                    ui.textSize(40);
+                    ui.fill(255);
+                    ui.text(Text[q], nx + nwidth / 20 + i * nwidth / 10, ny + nwidth / 20 + j * nwidth / 10);
+
+                }
+            }
+            //key of "Enter"
+            ui.stroke(255);
+            ui.strokeWeight(1);
+            ui.fill(0);
+            ui.rect(nx + width + 15, ny + nheight / 3 , nwidth / 9, nwidth / 10, 10);
+            ui.textAlign(PApplet.CENTER, PApplet.CENTER);
+            ui.strokeWeight(5);
+            ui.textSize(25);
+            ui.fill(255);
+            ui.text(Text[41],nx + nwidth + 15 + nwidth / 18, ny + nheight / 3 + nwidth / 20);
+
+            //draw screen
+            //big screen
+            ui.stroke(0);
+            ui.strokeWeight(10);
+            ui.fill(255);
+            ui.rect(nx / 2, ny - nheight * 3, nwidth * 1.5f, nheight * 1.8f, 10);
+            //small screen
+            ui.stroke(255);
+            ui.strokeWeight(10);
+            ui.fill(0);
+            ui.rect(nx, ny - nheight, nwidth, nheight, 10);
+        }
+                
+    }
+
+    void drawText()
+    {
+        if(flag5)
+        {
+            ui.strokeWeight(5);
+            ui.textSize(50);
+            ui.fill(255);
+            ui.text(Text[1], nx + nwidth / 2, ny - nheight / 2);
+        }
+    }
+
+    /*
+    void flag(){
+        for(int i = 0; i < 10; i++)
+        {
+            for(int j = 0; j < 4; j++)
+            {
+                int q = i + j * 10;
+                Boolean text[q] = true;
+
+            }
+        }
+
+    }*/
 
     //Judging whether the pause and start keys are pressed or not
     public void mouseClicked1()
@@ -383,6 +484,7 @@ public class Clock extends PApplet
 
     Boolean flag3 = true;//diplay classic clock
     Boolean flag4 = false;//display electronic clock
+    Boolean flag5 = false;//display note
 
     //select clock
     public void mouseClicked3()
@@ -405,6 +507,7 @@ public class Clock extends PApplet
         {
             flag3 = true;
             flag4 = false;
+            flag5 = false;
         }
 
         //Clinked Electronic button
@@ -424,6 +527,26 @@ public class Clock extends PApplet
         {
             flag3 = false;
             flag4 = true;
+            flag5 = false;
+        }
+
+        //Clicked Note button
+        int which3 = -1;
+        if ((ui.mouseX > sw * .75f && ui.mouseX < sw * .75f + 400))
+        {
+			if ((ui.mouseY > sh * .15f + p * 2 && ui.mouseY < sh * .15f + 200 + p * 2))
+            {
+                
+                which3 = 1;
+                
+            }
+			
+        }
+        if(which3 != -1)
+        {
+            flag3 = false;
+            flag4 = false;
+            flag5 = true;
         }
     }
 
