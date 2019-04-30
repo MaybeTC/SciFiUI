@@ -4,7 +4,7 @@ import com.sun.javafx.collections.MappingChange.Map;
 
 import processing.core.PApplet;
 
-public class Button2 extends PApplet
+public class ButtonLeft extends PApplet
 {
     UI ui;
     private float x;
@@ -15,7 +15,7 @@ public class Button2 extends PApplet
 
     private String[] Text = {"B", "U", "T", "T", "O", "N"};
 
-    public Button2(UI ui, float x, float y, float width, float height,float sw)
+    public ButtonLeft(UI ui, float x, float y, float width, float height,float sw)
     {
         this.ui = ui;
         this.x = x;
@@ -29,30 +29,31 @@ public class Button2 extends PApplet
     int e = 128;
     int f = 0;
     int g = 15;
+    int k = 0;
 
     void drawbutton2()
     {
         //Frame of button
         ui.noFill();
         ui.stroke(255);
-        ui.line(x, y + g, x + width, y - g);
-        ui.line(x, y + g, x, y + height + g);
-        ui.line(x + width, y - g, x + width, y + height - g);
-        ui.line(x, y + height + g, x + width, y + height - g);
+        ui.line(x + k, y + g, x + width + k, y - g);
+        ui.line(x + k, y + g, x + k, y + height + g);
+        ui.line(x + width + k, y - g, x + width + k, y + height - g);
+        ui.line(x + k, y + height + g, x + width + k, y + height - g);
         
         //Coloring button
         float c;
         float d;
         for(int j = 0 ; j < height ; j++)
         {
-            ui.line(x, y + g + j, x + width, y - g + j);
+            ui.line(x + k, y + g + j, x + width + k, y - g + j);
             c = map(j, 0, height, a, b);
             d = map(j, 0, height, e, f);
             ui.stroke(0, c, d);
         }
 
         //text of button
-        float a = x;
+        float a = x + k;
         float b = y;
         for(int i = 0 ; i < Text.length ; i ++){
             ui.textSize(30);
@@ -76,10 +77,12 @@ public class Button2 extends PApplet
         if (ui.mouseX < sw * .45f)
         {
             g = 0;
+            k = 35;
         }
         else
         {
             g = 15;
+            k = 0;
         }
     }
 
@@ -87,7 +90,7 @@ public class Button2 extends PApplet
     {
         int which = -1;
 		
-        if ((ui.mouseX > x && ui.mouseX < x + width))
+        if ((ui.mouseX > x + k && ui.mouseX < x + width + k))
         {
 			if ((ui.mouseY > y && ui.mouseY < y + height))
             {
