@@ -78,7 +78,7 @@ public class Clock extends PApplet
                     ui.stroke(0);
                     ui.line(cd * .416f, 0, cd * .433f, 0);
                 }
-                    ui.popMatrix();  // Restore coordinate system position
+                ui.popMatrix();  // Restore coordinate system position
             }
             //number
             ui.textAlign(PApplet.CENTER, PApplet.CENTER);
