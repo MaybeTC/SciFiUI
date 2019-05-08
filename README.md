@@ -1,11 +1,11 @@
-#SciFi UI Project
+# SciFi UI Project
 
 Name: Mingjun Gao
 
 Student Number: D16122910
 
 
-#Description of the assignment
+# Description of the assignment
 
 Use Java with Processing to create a UI for a sci-fi movie device like a warp drive, 
 engines, weapons system. You can base it on any movie you like or come up with your own. 
@@ -19,7 +19,7 @@ The unit circle and trigonometry
 pushMatrix, popMatrix, translate and rotate
 
 
-#Instructions
+# Instructions
 
 I made a UI about clock. The UI includes up and down gradient background, 
 central scanning radar, left and right gradient buttons, a classic clock, 
@@ -37,7 +37,7 @@ I originally wanted to make the third keyboard map capable of inputting, recordi
 But I encountered some technical problems and did not succeed.
 
 
-#How it works
+# How it works
 
 In the gradient layer above and below the background, the gradient button, I used for loop and line and rgb colormode to complete.
 Tilt the button by changing the value of y and change the value of y when the mouse approaches, I used if loop and mouseX mouseY.
@@ -53,13 +53,13 @@ I used float second = second()and string() to displayed the current time on diff
 and I used "boolean flag;" to central the current time displayed or not.
 
 
-#What I am most proud of in the assignment
+# What I am most proud of in the assignment
 
 The clock that records the current time.
 Changes in buttons when gradient buttons and proximity buttons are used.
 
 
-This is a youtube video:
+# This is a youtube video:
 
 https://www.youtube.com/watch?v=JX2MWciylao&feature=youtu.be
 
